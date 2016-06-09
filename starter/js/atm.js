@@ -1,12 +1,44 @@
-//Begin with the document ready function
+$( document ).ready(function() {
+    var availBalChecking = 0;
+    var availBalSavings = 0;
+    var transactionAmount = 0;
+    $('#depositChecking').click(function() {
+      transactionAmount = parseFloat($('#amountChecking').val());
+      availBalChecking += transactionAmount;
+      $('#checkingBalance').html("$" + availBalChecking);
+      });
+    $('#withdrawChecking').click(function() {
+      transactionAmount = parseFloat($('#amountChecking').val());
+      if(availBalChecking - transactionAmount < 0){
+        overDraftProtection();
+        // $('#checkingBalance').html("$" + availBalChecking);
+        }
+      else{
+        availBalChecking -= transactionAmount;
+        }
+      $('#checkingBalance').html("$" + availBalChecking);
+      });
+    $('#depositSavings').click(function() {
+      transactionAmount = parseFloat($('#amountSavings').val());
+      availBalSavings += transactionAmount;
+      $('#savingsBalance').html("$" + availBalSavings);
+     });
+    function getTransactionAmount() { //for drying code
+      transactionAmount = parseFloat($('#amountChecking').val());
+    }
+   function overDraftProtection() {
+        availBalSavings += availBalChecking;
+        availBalChecking = 0;
+        availBalSavings -= transactionAmount;
+        $('#savingsBalance').html("$" + availBalSavings);
+    }
+});
 
-    //Checking account deposit function
 
-      //On click of the depositChecking button
-
-        //Get value from the amountChecking input field
-
+//
         //Take that value and add it to the existing value in the checkingBalance div
+
+
 
     //Checking account withdrawl funtion
 
